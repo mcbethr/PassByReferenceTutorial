@@ -6,6 +6,9 @@ using static OutAndRefTutorial.ChamberInformation;
 
 namespace OutAndRefTutorial
 {
+    /// <summary>
+    /// Fires the Gab weapon using a class
+    /// </summary>
     public class GabWeaponClass
     {
         List<ChamberInformationClass> _ChamberData;
@@ -28,7 +31,7 @@ namespace OutAndRefTutorial
 
         public void ExecuteWeaponFlightTurn()
         {
-            ChamberInformationClass CIC = EngineTelemetry.GenerateFlightTelemetry(_ChamberData);
+            ChamberInformationClass CIC = EngineTelemetryClass.GenerateFlightTelemetry(_ChamberData);
             _ChamberData.Add(CIC);
             PrintWeaponTelemetry(CIC);
             
@@ -43,7 +46,7 @@ namespace OutAndRefTutorial
         private ChamberInformationClass GenerateInitialTelemetry()
         { 
 
-            ChamberInformationClass CIC = EngineTelemetry.GenerateInitialEngineTelemetry();
+            ChamberInformationClass CIC = EngineTelemetryClass.GenerateInitialEngineTelemetry();
             PrintWeaponTelemetry(CIC);
             return CIC;
         }

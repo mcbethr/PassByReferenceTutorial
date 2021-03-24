@@ -15,7 +15,7 @@ namespace OutAndRefTutorial
         public static int LowerPressureLimit = 40; //lower this below pressure too low for more malfunctions
         public static int PressureTooHigh = 71;
         public static int UpperPressureLimit = 71; //raise this above Pressure too high for more malfunctions
-        public static int MinimumReleaseAltitude = 1000;
+        public static int MinimumReleaseAltitude = 36000; ///Setting at 36000 for comparison
         public static int MaximumReleaseAltitude = 36000;
         public static int AltitudePerSecondLost = 20;
         public static int TerminalAltitudePerSecondLost = 880;

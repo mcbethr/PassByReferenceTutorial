@@ -10,27 +10,27 @@ namespace OutAndRefTutorial
     /// This class records weapon telemetry and engine chamber pressure information to
     /// send back to the launching vehicle
     /// </summary>
-    public static class EngineTelemetry {
+    public static class EngineTelemetryStruct {
 
 
 
-        public static ChamberInformationClass GenerateInitialEngineTelemetry()
+        public static ChamberInformationStruct GenerateInitialEngineTelemetry()
         {
-            ChamberInformationClass CIC = new ChamberInformationClass();
-            CIC.Altitude = FakeFlightTelemetry.GenerateRandomStartingAltitude();
-            CIC.Action = GabEnums.ActionTaken.NoAction; ///Just launched so no action
-            CIC.Location = FakeFlightTelemetry.GenerateRandomStartingLocation();
-            CIC.AveragePsi = 0;
-            CIC.ElapsedFlightTime = 0;
-            CIC.EngagementTime = 0;
-            CIC.PsiAfterCalibration = 0;
-            CIC.TimeStamp = DateTime.Now;
-            CIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
-            CIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
-            (GabEnums.FaultStatus Fault, GabEnums.FlightStatus Status) FaultCheck = CheckForFault(CIC.PsiAtReading, GabEnums.FlightStatus.InFlight);
-            CIC.Fault = FaultCheck.Fault;
-            CIC.Status = FaultCheck.Status;
-            return CIC;
+            ChamberInformationStruct CIS = new ChamberInformationStruct();
+            CIS.Altitude = FakeFlightTelemetry.GenerateRandomStartingAltitude();
+            CIS.Action = GabEnums.ActionTaken.NoAction; ///Just launched so no action
+            CIS.Location = FakeFlightTelemetry.GenerateRandomStartingLocation();
+            CIS.AveragePsi = 0;
+            CIS.ElapsedFlightTime = 0;
+            CIS.EngagementTime = 0;
+            CIS.PsiAfterCalibration = 0;
+            CIS.TimeStamp = DateTime.Now;
+            CIS.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
+            CIS.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
+            (GabEnums.FaultStatus Fault, GabEnums.FlightStatus Status) FaultCheck = CheckForFault(CIS.PsiAtReading, GabEnums.FlightStatus.InFlight);
+            CIS.Fault = FaultCheck.Fault;
+            CIS.Status = FaultCheck.Status;
+            return CIS;
         }
 
         /// <summary>
@@ -43,10 +43,13 @@ namespace OutAndRefTutorial
         /// </summary>
         /// <param name="chamberInformation"></param>
         /// <returns></returns>
-        public static ChamberInformationClass GenerateFlightTelemetry(List<ChamberInformationClass> chamberInformation)
+        public static void GenerateFlightTelemetry(ref ChamberInformation chamberInformation)
         {
-            ChamberInformationClass CIC = new ChamberInformationClass();
-            ChamberInformationClass LastInformationAdded = chamberInformation[chamberInformation.Count - 1];
+            /*
+            ChamberInformationStruct CIS = new ChamberInformationStruct();
+            int Findlast = chamberInformation
+            //ChamberInformationClass LastInformationAdded = chamberInformation[chamberInformation.Count - 1];
+
 
             //Adjust the altitude based on Loiter or Terminal mode
             //if the altitude is 0, terminate the flight
@@ -84,7 +87,7 @@ namespace OutAndRefTutorial
             CIC = AssembleGeneralTelemetry(CIC, LastInformationAdded);
 
             return CIC;
-
+            */
         }
 
         /// <summary>
