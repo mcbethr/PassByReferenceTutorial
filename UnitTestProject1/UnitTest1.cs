@@ -6,33 +6,7 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
-        public void TestCreateTireAndTestThroughParameters()
-        {
-            int CurrentPressure = 190;
-            int RequiredPressure = 200;
-            AircraftEnums.FaultStatus Fault;
-            
-            AircraftTireOperations ATO = new AircraftTireOperations();
-            Tire MyTire = new Tire(180);
 
-            ATO.CalibratePressure(ref CurrentPressure, in RequiredPressure, out Fault, MyTire);
-
-            Assert.AreEqual(200, CurrentPressure);
-        }
-
-        [TestMethod]
-        public void TestCreateTireAndTestThroughClass()
-        {
-            TirePressure TP = new TirePressure(190, 200, AircraftEnums.FaultStatus.Ok);
-            Tire MyTire = new Tire(180);
-
-            AircraftTireOperations ATO = new AircraftTireOperations();
-            TP = ATO.CalibratePressure(TP,MyTire);
-
-            Assert.AreEqual(200, TP.CurrentPressure);
-
-        }
 
         [TestMethod]
         public void TestAddTwoNumbers()

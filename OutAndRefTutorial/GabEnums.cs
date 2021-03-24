@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OutAndRefTutorial
 {
-	public class AircraftEnums
+	public class GabEnums
 	{
 
 		public enum FaultStatus
@@ -18,6 +18,14 @@ namespace OutAndRefTutorial
 			NoAction,
 			AddedPressure,
 			RemovedPressire
+        }
+
+		public enum FlightStatus
+        {
+			Ready,
+			InFlight,
+			Terminated
+
         }
 	}
 }

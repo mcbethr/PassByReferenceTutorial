@@ -5,15 +5,15 @@ using System.Drawing;
 
 namespace OutAndRefTutorial
 {
-    public class AdvancedExample
+    public class FakeFlightControl
     {
         public struct ChamberInformationStruct{
             int PsiAtReading;
             int PsiAfterCalibration;
             int ReccomendedPressure;
             int Altitude;
-            AircraftEnums.ActionTaken Action;
-            AircraftEnums.FaultStatus Fault;
+            GabEnums.ActionTaken Action;
+            GabEnums.FaultStatus Fault;
             DateTime TimeOfReading;
             Point Location;
         }
@@ -24,20 +24,26 @@ namespace OutAndRefTutorial
             public int Altitude { get; set; }
             public int PsiAfterCalibration { get; set; }
             public int ReccomendedPressure { get; set; }
-            public AircraftEnums.ActionTaken Action {get;set;}
-            public AircraftEnums.FaultStatus Fault { get; set; }
+            public GabEnums.ActionTaken Action {get;set;}
+            public GabEnums.FaultStatus Fault { get; set; }
             public DateTime TimeOfReading { get; set; }
             public Point Location { get; set; }
         }
 
-        public AdvancedExample()
+        public FakeFlightControl()
         {
 
         }
 
         public (Point,int,int) GenerateInitialFakeFlightData()
         {
+            (Point Location, int Psi, int Altitude) WeaponRelease;
 
+            WeaponRelease.Location = GenerateRandomStartingLocation();
+            WeaponRelease.Psi = GenerateRandomPressure();
+            WeaponRelease.Altitude = GenerateRandomStartingAltitude();
+
+            return WeaponRelease;
         }
 
         /// <summary>
