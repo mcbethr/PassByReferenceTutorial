@@ -24,6 +24,8 @@ namespace OutAndRefTutorial
         {
 			Ready,
 			InFlight,
+			Terminal,
+			SelfInert,
 			Terminated
 
         }
