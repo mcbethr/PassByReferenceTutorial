@@ -61,12 +61,36 @@ namespace OutAndRefTutorial
             Random rnd = new Random();
             return (rnd.Next(PressureTooLow, PressureTooHigh));
         }
+        /// <summary>
+        /// Increase and decrease do the same thing since we are just returning fake values
+        /// in real life, we would have specific actions
+        /// </summary>
+        /// <param name="TargetPressure"></param>
+        /// <returns></returns>
+        public static int IncreasePressure(int TargetPressure)
+        {
+            return AttemptToAdjustPressure(TargetPressure);
+        }
 
-        public static int AttemptToAdjustPressure(int TargetPressure, int OriginalPressure)
+        public static int DecreasePressure(int TargetPressure)
+        {
+            return AttemptToAdjustPressure(TargetPressure);
+        }
+
+        private static int AttemptToAdjustPressure(int TargetPressure)
         {
             Random rnd = new Random();
 
             int SuccessChance = rnd.Next(PressureAdjustmentSuccessChance, 100);
+
+            if (SuccessChance <= PressureAdjustmentSuccessChance)
+            {
+                return TargetPressure;
+            }
+            else
+            {
+                return GenerateRandomPressure();
+            }
 
         }
 

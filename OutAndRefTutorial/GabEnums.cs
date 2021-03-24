@@ -17,7 +17,7 @@ namespace OutAndRefTutorial
         {
 			NoAction,
 			AddedPressure,
-			RemovedPressire
+			RemovedPressure
         }
 
 		public enum FlightStatus

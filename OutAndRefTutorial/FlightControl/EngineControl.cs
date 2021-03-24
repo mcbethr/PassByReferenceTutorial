@@ -15,7 +15,6 @@ namespace OutAndRefTutorial
             public int ReccomendedPressure;
             public int Altitude;
             public decimal AveragePsi;
-            public decimal MedianPsi;
             public int ElapsedFlightTime;
             public int ElapsedFlightTimeToTargetIdentification;
             public GabEnums.ActionTaken Action;
@@ -31,7 +30,6 @@ namespace OutAndRefTutorial
             public int Altitude { get; set; }
             public int PsiAfterCalibration { get; set; }
             public decimal AveragePsi { get; set; }
-            public decimal MedianPsi { get; set; }
             public int ElapsedFlightTime { get; set; }
             public int ElapsedFlightTimeToTargetIdentification { get; set; }
             public int ReccomendedPressure { get; set; }
