@@ -12,11 +12,13 @@ namespace OutAndRefTutorial
         /// </summary>
         public static int ReccomendedPressure = 55;
         public static int PressureTooLow = 39;
+        public static int LowerPressureLimit = 40; //lower this below pressure too low for more malfunctions
         public static int PressureTooHigh = 71;
+        public static int UpperPressureLimit = 71; //raise this above Pressure too high for more malfunctions
         public static int MinimumReleaseAltitude = 1000;
         public static int MaximumReleaseAltitude = 36000;
         public static int AltitudePerSecondLost = 20;
-        public static int TerminalAltitudePerSecondLost = 220;
+        public static int TerminalAltitudePerSecondLost = 880;
         public static int FindTargetPercentageChance = 50;
         public static int PressureAdjustmentSuccessChance = 100;
 
@@ -48,7 +50,7 @@ namespace OutAndRefTutorial
             int NorthSouth = rnd.Next(-1, 1);
             int EastWest = rnd.Next(-1, 1);
 
-            return (new Point((Location.Y + NorthSouth), (Location.X - EastWest)));
+            return (new Point((Location.X - EastWest), (Location.Y + NorthSouth)));
         }
 
         /// <summary>
@@ -59,7 +61,7 @@ namespace OutAndRefTutorial
         public static int GenerateRandomPressure()
         {
             Random rnd = new Random();
-            return (rnd.Next(PressureTooLow, PressureTooHigh));
+            return (rnd.Next(LowerPressureLimit, UpperPressureLimit));
         }
         /// <summary>
         /// Increase and decrease do the same thing since we are just returning fake values
@@ -145,11 +147,7 @@ namespace OutAndRefTutorial
         private static int DecrementLoiterAltitude(int CurrentAltitude)
         {
             int Altitude = CurrentAltitude - AltitudePerSecondLost;
-            if (Altitude <= 0)
-            {
-                ///Flight it terminated
-                Altitude = 0;
-            }
+
 
             return Altitude;
         }
@@ -169,14 +167,23 @@ namespace OutAndRefTutorial
         public static GabEnums.FlightStatus HasFoundTarget(int secondsAloft)
         {
             Random rnd = new Random();
-            int FoundTarget = rnd.Next(secondsAloft + FindTargetPercentageChance, 100);
+
+            int ChanceToFindTarget = secondsAloft + FindTargetPercentageChance;
+            if (ChanceToFindTarget >=100)
+                {
+                ChanceToFindTarget = 100;
+                }
+
+            int FoundTarget = rnd.Next(ChanceToFindTarget, 100);
 
             if (FoundTarget >= 100)
             {
+                //We found a target, dive.
                 return GabEnums.FlightStatus.Terminal;
             }
             else
             {
+                //Loiter
                 return GabEnums.FlightStatus.InFlight;
             }
         }

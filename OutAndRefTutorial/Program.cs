@@ -6,7 +6,14 @@ namespace OutAndRefTutorial
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GabWeaponClass GWC = new GabWeaponClass();
+            
+            while (GWC.LastChamberData.Status != GabEnums.FlightStatus.Terminated)
+            {
+                GWC.ExecuteWeaponFlightTurn();
+            }
+            GWC.DisplayEngagement();
+
         }
     }
 }

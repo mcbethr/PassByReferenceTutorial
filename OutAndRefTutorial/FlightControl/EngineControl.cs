@@ -16,11 +16,11 @@ namespace OutAndRefTutorial
             public int Altitude;
             public decimal AveragePsi;
             public int ElapsedFlightTime;
-            public int ElapsedFlightTimeToTargetIdentification;
+            public int EngagementTime;
             public GabEnums.ActionTaken Action;
             public GabEnums.FaultStatus Fault;
             public GabEnums.FlightStatus Status;
-            public DateTime TimeOfReading;
+            public DateTime TimeStamp;
             public Point Location;
         }
 
@@ -31,12 +31,12 @@ namespace OutAndRefTutorial
             public int PsiAfterCalibration { get; set; }
             public decimal AveragePsi { get; set; }
             public int ElapsedFlightTime { get; set; }
-            public int ElapsedFlightTimeToTargetIdentification { get; set; }
+            public int EngagementTime { get; set; }
             public int ReccomendedPressure { get; set; }
             public GabEnums.ActionTaken Action { get; set; }
             public GabEnums.FaultStatus Fault { get; set; }
             public GabEnums.FlightStatus Status{ get; set; }
-            public DateTime TimeOfReading { get; set; }
+            public DateTime TimeStamp { get; set; }
             public Point Location { get; set; }
         }
 
