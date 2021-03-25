@@ -5733,19 +5733,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ryanm\\.nuget\\packages\\": {}
+    "C:\\Users\\admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\UnitTestProject1.csproj",
+      "projectUniqueName": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\UnitTestProject1.csproj",
       "projectName": "UnitTestProject1",
-      "projectPath": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\UnitTestProject1.csproj",
-      "packagesPath": "C:\\Users\\ryanm\\.nuget\\packages\\",
-      "outputPath": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\obj\\",
+      "projectPath": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\UnitTestProject1.csproj",
+      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+      "outputPath": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\UnitTestProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ryanm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5759,8 +5759,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {
-              "projectPath": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj"
+            "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {
+              "projectPath": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj"
             }
           }
         }
@@ -5807,7 +5807,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

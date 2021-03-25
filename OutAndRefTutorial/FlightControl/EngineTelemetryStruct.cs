@@ -14,9 +14,9 @@ namespace OutAndRefTutorial
 
 
 
-        public static ChamberInformationStruct GenerateInitialEngineTelemetry()
+        public static void GenerateInitialEngineTelemetry(out ChamberInformationStruct CIS)
         {
-            ChamberInformationStruct CIS = new ChamberInformationStruct();
+
             CIS.Altitude = FakeFlightTelemetry.GenerateRandomStartingAltitude();
             CIS.Action = GabEnums.ActionTaken.NoAction; ///Just launched so no action
             CIS.Location = FakeFlightTelemetry.GenerateRandomStartingLocation();
@@ -30,7 +30,7 @@ namespace OutAndRefTutorial
             (GabEnums.FaultStatus Fault, GabEnums.FlightStatus Status) FaultCheck = CheckForFault(CIS.PsiAtReading, GabEnums.FlightStatus.InFlight);
             CIS.Fault = FaultCheck.Fault;
             CIS.Status = FaultCheck.Status;
-            return CIS;
+          
         }
 
         /// <summary>
@@ -43,12 +43,11 @@ namespace OutAndRefTutorial
         /// </summary>
         /// <param name="chamberInformation"></param>
         /// <returns></returns>
-        public static void GenerateFlightTelemetry(ref ChamberInformationStruct[] chamberInformation, ref ChamberInformationStruct CIS)
+        public static void GenerateFlightTelemetry(ref ChamberInformationStruct[] chamberInformation, ref ChamberInformationStruct CIS, in int CurrentTick)
         {
 
-            int chamberArrayNextIndex = Array.FindLastIndex(chamberInformation, null);
 
-            ChamberInformationStruct LastInformationAdded = chamberInformation[chamberArrayNextIndex - 1];
+            ChamberInformationStruct LastInformationAdded = chamberInformation[CurrentTick - 1];
            
         //Adjust the altitude based on Loiter or Terminal mode
         //if the altitude is 0, terminate the flight

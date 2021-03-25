@@ -36,3 +36,4 @@ C:\code\OutAndRefTutorial\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\
 C:\code\OutAndRefTutorial\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Debug\netcoreapp3.1\OutAndRefTutorial.dll
 C:\code\OutAndRefTutorial\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Debug\netcoreapp3.1\OutAndRefTutorial.pdb
 C:\code\OutAndRefTutorial\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Debug\netcoreapp3.1\OutAndRefTutorial.genruntimeconfig.cache
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Debug\netcoreapp3.1\OutAndRefTutorial.csprojAssemblyReference.cache
