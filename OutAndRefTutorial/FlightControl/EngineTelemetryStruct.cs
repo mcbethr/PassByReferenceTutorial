@@ -43,51 +43,48 @@ namespace OutAndRefTutorial
         /// </summary>
         /// <param name="chamberInformation"></param>
         /// <returns></returns>
-        public static void GenerateFlightTelemetry(ref ChamberInformation chamberInformation)
+        public static void GenerateFlightTelemetry(ref ChamberInformationStruct[] chamberInformation, ref ChamberInformationStruct CIS)
         {
-            /*
-            ChamberInformationStruct CIS = new ChamberInformationStruct();
-            int Findlast = chamberInformation
-            //ChamberInformationClass LastInformationAdded = chamberInformation[chamberInformation.Count - 1];
 
+            int chamberArrayNextIndex = Array.FindLastIndex(chamberInformation, null);
 
-            //Adjust the altitude based on Loiter or Terminal mode
-            //if the altitude is 0, terminate the flight
-            //we won't have any more data to deploy anyway
-            CIC.Altitude = FakeFlightTelemetry.DecrementAltitude(LastInformationAdded.Altitude, LastInformationAdded.Status);
-            
+            ChamberInformationStruct LastInformationAdded = chamberInformation[chamberArrayNextIndex - 1];
+           
+        //Adjust the altitude based on Loiter or Terminal mode
+        //if the altitude is 0, terminate the flight
+        //we won't have any more data to deploy anyway
+        CIS.Altitude = FakeFlightTelemetry.DecrementAltitude(LastInformationAdded.Altitude, LastInformationAdded.Status);
+
             //Remember the engagement time
-            CIC.EngagementTime = LastInformationAdded.EngagementTime;
+        CIS.EngagementTime = LastInformationAdded.EngagementTime;
 
-            //Always set the status based on the last status 
-            //so that terminal stays terminal and insert stays inert
-            CIC.Status = LastInformationAdded.Status;
+        //Always set the status based on the last status 
+        //so that terminal stays terminal and insert stays inert
+        CIS.Status = LastInformationAdded.Status;
 
-            if (CIC.Altitude <= 0)
-            {
-                CIC.Status = GabEnums.FlightStatus.Terminated;
-                return CIC; // just return. There is no further information to send
-            }
+        if (CIS.Altitude <= 0)
+        {
+            CIS.Status = GabEnums.FlightStatus.Terminated;
+        }
 
-            ///If the weapon is loitering, look for a target
-            if (LastInformationAdded.Status == GabEnums.FlightStatus.InFlight)
-            {
-                ///Right now we're using the elapsed time to add a measure of randomness
-                ///into whether the weapon finds a target.
-                CIC.Status = FakeFlightTelemetry.HasFoundTarget(LastInformationAdded.ElapsedFlightTime);
-            }
+        ///If the weapon is loitering, look for a target
+        if (LastInformationAdded.Status == GabEnums.FlightStatus.InFlight)
+        {
+            ///Right now we're using the elapsed time to add a measure of randomness
+            ///into whether the weapon finds a target.
+            CIS.Status = FakeFlightTelemetry.HasFoundTarget(LastInformationAdded.ElapsedFlightTime);
+        }
 
-            ///If the weapon is not inert, check the engine pressure
-            if (LastInformationAdded.Status != GabEnums.FlightStatus.SelfInert)
-            {
-                CIC = InspectCombustionChamber(chamberInformation, CIC,LastInformationAdded);
-            }
+        ///If the weapon is not inert, check the engine pressure
+        if (LastInformationAdded.Status != GabEnums.FlightStatus.SelfInert)
+        {
+            InspectCombustionChamber(in chamberInformation, ref CIS, in LastInformationAdded);
+        }
 
-            //regardless of what happens, assemble the general telemetry and update the location
-            CIC = AssembleGeneralTelemetry(CIC, LastInformationAdded);
+        //regardless of what happens, assemble the general telemetry and update the location
+        AssembleGeneralTelemetry(ref CIS, in LastInformationAdded);
 
-            return CIC;
-            */
+        
         }
 
         /// <summary>
@@ -96,47 +93,45 @@ namespace OutAndRefTutorial
         /// <param name="CIC"></param>
         /// <param name="LastInformationAdded"></param>
         /// <returns></returns>
-            private static ChamberInformationClass AssembleGeneralTelemetry( ChamberInformationClass CIC, ChamberInformationClass LastInformationAdded)
+            private static void AssembleGeneralTelemetry( ref ChamberInformationStruct CIS, in ChamberInformationStruct LastInformationAdded)
             {
                 ///Move weapon location
-                CIC.Location = FakeFlightTelemetry.GenerateRandomLocationFromLocation(LastInformationAdded.Location);
+                CIS.Location = FakeFlightTelemetry.GenerateRandomLocationFromLocation(LastInformationAdded.Location);
 
                 //GenerateFlightTime
-                CIC.ElapsedFlightTime = LastInformationAdded.ElapsedFlightTime + 1;
+                CIS.ElapsedFlightTime = LastInformationAdded.ElapsedFlightTime + 1;
                 
-                if (CIC.Status == GabEnums.FlightStatus.Terminal)
+                if (CIS.Status == GabEnums.FlightStatus.Terminal)
                 {
-                CIC.EngagementTime = CIC.EngagementTime + 1;
+                CIS.EngagementTime = CIS.EngagementTime + 1;
                 }
 
                 //Generate Timestamp
-                CIC.TimeStamp = DateTime.Now;
-
-                return CIC;
+                CIS.TimeStamp = DateTime.Now;
             }
 
         /// <summary>
         /// Inspects the engine combustion chamber for problems calibrates pressure if not at the desired pressure
         /// </summary>
-        /// <param name="CIC"></param>
+        /// <param name="CIS"></param>
         /// <param name="LastInformationAdded"></param>
         /// <returns></returns>
-            private static ChamberInformationClass InspectCombustionChamber(List<ChamberInformationClass> ChamberInformation,ChamberInformationClass CIC, ChamberInformationClass LastInformationAdded)
+            private static void InspectCombustionChamber(in ChamberInformationStruct[] ChamberInformation, ref ChamberInformationStruct CIS, in ChamberInformationStruct LastInformationAdded)
         {
 
             //Check the current pressure of the unit
-            CIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
+            CIS.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
 
             //Grab the reccomended pressure.
-            CIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
+            CIS.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
 
             //Calibrate the pressure
-            (CIC.PsiAfterCalibration, CIC.Action, CIC.Fault, CIC.Status) = CalibratePressure(CIC.PsiAtReading, FakeFlightTelemetry.ReccomendedPressure, CIC.Status);
+            (CIS.PsiAfterCalibration, CIS.Action, CIS.Fault, CIS.Status) = CalibratePressure(CIS.PsiAtReading, FakeFlightTelemetry.ReccomendedPressure, CIS.Status);
 
             //Get the Average Engine Pressure
-            CIC.AveragePsi = Convert.ToDecimal(ChamberInformation.Average(item => item.PsiAtReading));
+            CIS.AveragePsi = Convert.ToDecimal(ChamberInformation.Average(item => item.PsiAtReading));
 
-            return CIC;
+            
         }
 
         ///If the pressure is outside of the standard pressure range, something has gone disasterously

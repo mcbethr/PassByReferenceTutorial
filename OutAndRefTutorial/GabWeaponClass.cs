@@ -29,7 +29,7 @@ namespace OutAndRefTutorial
             
         }
 
-        public void ExecuteWeaponFlightTurn()
+        public void ExecuteWeaponFlightTick()
         {
             ChamberInformationClass CIC = EngineTelemetryClass.GenerateFlightTelemetry(_ChamberData);
             _ChamberData.Add(CIC);

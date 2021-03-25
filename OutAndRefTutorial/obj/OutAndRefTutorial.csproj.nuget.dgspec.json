@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {}
+    "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {}
   },
   "projects": {
-    "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {
+    "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj",
+        "projectUniqueName": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj",
         "projectName": "OutAndRefTutorial",
-        "projectPath": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj",
-        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Code\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\obj\\",
+        "projectPath": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\OutAndRefTutorial.csproj",
+        "packagesPath": "C:\\Users\\ryanm\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\OutAndRefTutorial\\OutAndRefTutorial-GlideAssistedBomb\\OutAndRefTutorial\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ryanm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }
