@@ -12,7 +12,7 @@ namespace OutAndRefTutorial
     {
         private int _CurrentTick = 0;
 
-        ChamberInformationStruct[] _ChamberData = new ChamberInformationStruct[3600];
+        ChamberInformationStruct[] _ChamberData = new ChamberInformationStruct[92];//should be 3600
 
         public ChamberInformationStruct[] ChamberData { get { return _ChamberData; } }
 
