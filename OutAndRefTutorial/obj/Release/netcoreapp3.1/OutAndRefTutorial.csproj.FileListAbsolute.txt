@@ -1,0 +1,13 @@
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.exe
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.deps.json
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.runtimeconfig.json
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.runtimeconfig.dev.json
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.dll
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\bin\Release\netcoreapp3.1\OutAndRefTutorial.pdb
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.csprojAssemblyReference.cache
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.AssemblyInfoInputs.cache
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.AssemblyInfo.cs
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.csproj.CoreCompileInputs.cache
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.dll
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.pdb
+C:\Code\OutAndRefTutorial-GlideAssistedBomb\OutAndRefTutorial\obj\Release\netcoreapp3.1\OutAndRefTutorial.genruntimeconfig.cache

@@ -8,19 +8,39 @@ namespace OutAndRefTutorial
     {
         static void Main(string[] args)
         {
-            Stopwatch stopwatch1 = new Stopwatch();
-            Stopwatch stopwatch2 = new Stopwatch();
+            long Engagement1Time = RunClassEngagement();
+            long Engagement2Time = RunStructureEngagement();
 
+            Console.WriteLine("Engagement 1 (Class    ): " + Engagement1Time + " milliseconds.");
+            Console.WriteLine("Engagement 2 (structure): " + Engagement2Time + " milliseconds.");
+
+
+        }
+
+        public static long RunClassEngagement()
+        {
+            Stopwatch stopwatch1 = new Stopwatch();
             stopwatch1.Start();
             GabWeaponClass GWC = new GabWeaponClass();
-            
+
             ///Run as a class
             while (GWC.LastChamberData.Status != GabEnums.FlightStatus.Terminated)
             {
                 GWC.ExecuteWeaponFlightTick();
+
+                ///For debugging
+                if (GWC.LastChamberData.Status == GabEnums.FlightStatus.Terminated)
+                { //break
+                }
             }
             GWC.DisplayEngagement();
             stopwatch1.Stop();
+            return stopwatch1.ElapsedMilliseconds;
+        }
+
+        public static long RunStructureEngagement()
+        {
+            Stopwatch stopwatch2 = new Stopwatch();
 
             stopwatch2.Start();
             //Run as a Structure
@@ -29,13 +49,17 @@ namespace OutAndRefTutorial
             while (GWS.LastChamberData.Status != GabEnums.FlightStatus.Terminated)
             {
                 GWS.ExecuteWeaponFlightTick();
+
+                ///For debugging
+                if (GWS.LastChamberData.Status == GabEnums.FlightStatus.Terminated)
+                { //break}
+                }
             }
             GWS.DisplayEngagement();
             stopwatch2.Stop();
 
-            ///display engagement times
-            Console.WriteLine("Engagement 1 (Class    ): " + stopwatch1.ElapsedMilliseconds + " milliseconds.");
-            Console.WriteLine("Engagement 2 (structure): " + stopwatch2.ElapsedMilliseconds + " milliseconds.");
+            return stopwatch2.ElapsedMilliseconds;
         }
+
     }
 }
