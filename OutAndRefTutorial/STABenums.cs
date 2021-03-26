@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OutAndRefTutorial
 {
-	public class GabEnums
+	public class STABenums
 	{
 
 		public enum FaultStatus

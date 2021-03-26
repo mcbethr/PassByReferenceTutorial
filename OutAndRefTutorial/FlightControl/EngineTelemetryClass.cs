@@ -14,23 +14,23 @@ namespace OutAndRefTutorial
 
 
 
-        public static ChamberInformationClass GenerateInitialEngineTelemetry()
+        public static TelemetryInformationClass GenerateInitialEngineTelemetry()
         {
-            ChamberInformationClass CIC = new ChamberInformationClass();
-            CIC.Altitude = FakeFlightTelemetry.GenerateRandomStartingAltitude();
-            CIC.Action = GabEnums.ActionTaken.NoAction; ///Just launched so no action
-            CIC.Location = FakeFlightTelemetry.GenerateRandomStartingLocation();
-            CIC.AveragePsi = 0;
-            CIC.ElapsedFlightTime = 0;
-            CIC.EngagementTime = 0;
-            CIC.PsiAfterCalibration = 0;
-            CIC.TimeStamp = DateTime.Now;
-            CIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
-            CIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
-            (GabEnums.FaultStatus Fault, GabEnums.FlightStatus Status) FaultCheck = CheckForFault(CIC.PsiAtReading, GabEnums.FlightStatus.InFlight);
-            CIC.Fault = FaultCheck.Fault;
-            CIC.Status = FaultCheck.Status;
-            return CIC;
+            TelemetryInformationClass TIC = new TelemetryInformationClass();
+            TIC.Altitude = FakeFlightTelemetry.GenerateRandomStartingAltitude();
+            TIC.Action = STABenums.ActionTaken.NoAction; ///Just launched so no action
+            TIC.Location = FakeFlightTelemetry.GenerateRandomStartingLocation();
+            TIC.AveragePsi = 0;
+            TIC.ElapsedFlightTime = 0;
+            TIC.EngagementTime = 0;
+            TIC.PsiAfterCalibration = 0;
+            TIC.TimeStamp = DateTime.Now;
+            TIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
+            TIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
+            (STABenums.FaultStatus Fault, STABenums.FlightStatus Status) FaultCheck = CheckForFault(TIC.PsiAtReading, STABenums.FlightStatus.InFlight);
+            TIC.Fault = FaultCheck.Fault;
+            TIC.Status = FaultCheck.Status;
+            return TIC;
         }
 
         /// <summary>
@@ -43,97 +43,97 @@ namespace OutAndRefTutorial
         /// </summary>
         /// <param name="chamberInformation"></param>
         /// <returns></returns>
-        public static ChamberInformationClass GenerateFlightTelemetry(List<ChamberInformationClass> chamberInformation)
+        public static TelemetryInformationClass GenerateFlightTelemetry(List<TelemetryInformationClass> chamberInformation)
         {
-            ChamberInformationClass CIC = new ChamberInformationClass();
-            ChamberInformationClass LastInformationAdded = chamberInformation[chamberInformation.Count - 1];
+            TelemetryInformationClass TIC = new TelemetryInformationClass();
+            TelemetryInformationClass LastInformationAdded = chamberInformation[chamberInformation.Count - 1];
 
             //Adjust the altitude based on Loiter or Terminal mode
             //if the altitude is 0, terminate the flight
             //we won't have any more data to deploy anyway
-            CIC.Altitude = FakeFlightTelemetry.DecrementAltitude(LastInformationAdded.Altitude, LastInformationAdded.Status);
+            TIC.Altitude = FakeFlightTelemetry.DecrementAltitude(LastInformationAdded.Altitude, LastInformationAdded.Status);
             
             //Remember the engagement time
-            CIC.EngagementTime = LastInformationAdded.EngagementTime;
+            TIC.EngagementTime = LastInformationAdded.EngagementTime;
 
             //Always set the status based on the last status 
             //so that terminal stays terminal and insert stays inert
-            CIC.Status = LastInformationAdded.Status;
+            TIC.Status = LastInformationAdded.Status;
 
-            if (CIC.Altitude <= 0)
+            if (TIC.Altitude <= 0)
             {
-                CIC.Status = GabEnums.FlightStatus.Terminated;
-                return CIC; // just return. There is no further information to send
+                TIC.Status = STABenums.FlightStatus.Terminated;
+                return TIC; // just return. There is no further information to send
             }
 
             ///If the weapon is loitering, look for a target
-            if (LastInformationAdded.Status == GabEnums.FlightStatus.InFlight)
+            if (LastInformationAdded.Status == STABenums.FlightStatus.InFlight)
             {
                 ///Right now we're using the elapsed time to add a measure of randomness
                 ///into whether the weapon finds a target.
-                CIC.Status = FakeFlightTelemetry.HasFoundTarget(LastInformationAdded.ElapsedFlightTime);
+                TIC.Status = FakeFlightTelemetry.HasFoundTarget(LastInformationAdded.ElapsedFlightTime);
             }
 
             ///If the weapon is not inert, check the engine pressure
-            if (LastInformationAdded.Status != GabEnums.FlightStatus.SelfInert)
+            if (LastInformationAdded.Status != STABenums.FlightStatus.SelfInert)
             {
-                CIC = InspectCombustionChamber(chamberInformation, CIC,LastInformationAdded);
+                TIC = InspectCombustionChamber(chamberInformation, TIC,LastInformationAdded);
             }
 
             //regardless of what happens, assemble the general telemetry and update the location
-            CIC = AssembleGeneralTelemetry(CIC, LastInformationAdded);
+            TIC = AssembleGeneralTelemetry(TIC, LastInformationAdded);
 
-            return CIC;
+            return TIC;
 
         }
 
         /// <summary>
         /// Used for general statistical information like flight time nad location
         /// </summary>
-        /// <param name="CIC"></param>
+        /// <param name="TIC"></param>
         /// <param name="LastInformationAdded"></param>
         /// <returns></returns>
-            private static ChamberInformationClass AssembleGeneralTelemetry( ChamberInformationClass CIC, ChamberInformationClass LastInformationAdded)
+            private static TelemetryInformationClass AssembleGeneralTelemetry( TelemetryInformationClass TIC, TelemetryInformationClass LastInformationAdded)
             {
                 ///Move weapon location
-                CIC.Location = FakeFlightTelemetry.GenerateRandomLocationFromLocation(LastInformationAdded.Location);
+                TIC.Location = FakeFlightTelemetry.GenerateRandomLocationFromLocation(LastInformationAdded.Location);
 
                 //GenerateFlightTime
-                CIC.ElapsedFlightTime = LastInformationAdded.ElapsedFlightTime + 1;
+                TIC.ElapsedFlightTime = LastInformationAdded.ElapsedFlightTime + 1;
                 
-                if (CIC.Status == GabEnums.FlightStatus.Terminal)
+                if (TIC.Status == STABenums.FlightStatus.Terminal)
                 {
-                CIC.EngagementTime = CIC.EngagementTime + 1;
+                TIC.EngagementTime = TIC.EngagementTime + 1;
                 }
 
                 //Generate Timestamp
-                CIC.TimeStamp = DateTime.Now;
+                TIC.TimeStamp = DateTime.Now;
 
-                return CIC;
+                return TIC;
             }
 
         /// <summary>
         /// Inspects the engine combustion chamber for problems calibrates pressure if not at the desired pressure
         /// </summary>
-        /// <param name="CIC"></param>
+        /// <param name="TIC"></param>
         /// <param name="LastInformationAdded"></param>
         /// <returns></returns>
-            private static ChamberInformationClass InspectCombustionChamber(List<ChamberInformationClass> ChamberInformation,ChamberInformationClass CIC, ChamberInformationClass LastInformationAdded)
+            private static TelemetryInformationClass InspectCombustionChamber(List<TelemetryInformationClass> ChamberInformation,TelemetryInformationClass TIC, TelemetryInformationClass LastInformationAdded)
         {
 
             //Check the current pressure of the unit
-            CIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
+            TIC.PsiAtReading = FakeFlightTelemetry.GenerateRandomPressure();
 
             //Grab the reccomended pressure.
-            CIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
+            TIC.ReccomendedPressure = FakeFlightTelemetry.ReccomendedPressure;
 
             //Calibrate the pressure
-            (CIC.PsiAfterCalibration, CIC.Action, CIC.Fault, CIC.Status) = CalibratePressure(CIC.PsiAtReading, FakeFlightTelemetry.ReccomendedPressure, CIC.Status);
+            (TIC.PsiAfterCalibration, TIC.Action, TIC.Fault, TIC.Status) = CalibratePressure(TIC.PsiAtReading, FakeFlightTelemetry.ReccomendedPressure, TIC.Status);
 
             //Get the Average Engine Pressure
-            CIC.AveragePsi = Convert.ToDecimal(ChamberInformation.Average(item => item.PsiAtReading));
+            TIC.AveragePsi = Convert.ToDecimal(ChamberInformation.Average(item => item.PsiAtReading));
 
-            return CIC;
+            return TIC;
         }
 
         ///If the pressure is outside of the standard pressure range, something has gone disasterously
@@ -143,7 +143,7 @@ namespace OutAndRefTutorial
         ///
         ///If we're already in terminal mode, send back the fault message so we can log it, but
         ///don't let the weapon flip to inert
-        private static (GabEnums.FaultStatus, GabEnums.FlightStatus) CheckForFault(int CurrentPressure, GabEnums.FlightStatus Status)
+        private static (STABenums.FaultStatus, STABenums.FlightStatus) CheckForFault(int CurrentPressure, STABenums.FlightStatus Status)
             {
 
 
@@ -151,18 +151,18 @@ namespace OutAndRefTutorial
                 //else, pass back OK and the current status
                 if ((CurrentPressure >= FakeFlightTelemetry.PressureTooHigh) || (CurrentPressure <= FakeFlightTelemetry.PressureTooLow))
                 {
-                    if (Status == GabEnums.FlightStatus.Terminal)
+                    if (Status == STABenums.FlightStatus.Terminal)
                     {
-                        return (GabEnums.FaultStatus.Fault, GabEnums.FlightStatus.Terminal);
+                        return (STABenums.FaultStatus.Fault, STABenums.FlightStatus.Terminal);
                     }
                     else 
                     {
-                      return (GabEnums.FaultStatus.Fault, GabEnums.FlightStatus.SelfInert);
+                      return (STABenums.FaultStatus.Fault, STABenums.FlightStatus.SelfInert);
                     }
                 }
                 else
                 {
-                    return (GabEnums.FaultStatus.Ok, Status);
+                    return (STABenums.FaultStatus.Ok, Status);
                 }
   
 
@@ -175,30 +175,30 @@ namespace OutAndRefTutorial
             /// <param name="OriginalPsi"></param>
             /// <param name="ReccomendedPressure"></param>
             /// <returns></returns>
-            private static (int, GabEnums.ActionTaken, GabEnums.FaultStatus, GabEnums.FlightStatus) CalibratePressure(int OriginalPsi, int ReccomendedPressure, GabEnums.FlightStatus Status)
+            private static (int, STABenums.ActionTaken, STABenums.FaultStatus, STABenums.FlightStatus) CalibratePressure(int OriginalPsi, int ReccomendedPressure, STABenums.FlightStatus Status)
             {
-                GabEnums.ActionTaken Action;
+                STABenums.ActionTaken Action;
 
                 int CurrentPsi;
 
                 if (OriginalPsi < ReccomendedPressure)
                 {
-                    Action = GabEnums.ActionTaken.AddedPressure;
+                    Action = STABenums.ActionTaken.AddedPressure;
                     CurrentPsi = FakeFlightTelemetry.IncreasePressure(ReccomendedPressure);
 
                 }
                 else if (OriginalPsi > ReccomendedPressure)
                 {
-                    Action = GabEnums.ActionTaken.RemovedPressure;
+                    Action = STABenums.ActionTaken.RemovedPressure;
                     CurrentPsi = FakeFlightTelemetry.DecreasePressure(ReccomendedPressure);
                 }
                 else
                 {
-                    Action = GabEnums.ActionTaken.NoAction;
+                    Action = STABenums.ActionTaken.NoAction;
                     CurrentPsi = OriginalPsi;
                 }
 
-                (GabEnums.FaultStatus WeaponFaultStatus, GabEnums.FlightStatus WeaponFlightStatus) = CheckForFault(OriginalPsi, Status);
+                (STABenums.FaultStatus WeaponFaultStatus, STABenums.FlightStatus WeaponFlightStatus) = CheckForFault(OriginalPsi, Status);
 
                 return (CurrentPsi, Action, WeaponFaultStatus, WeaponFlightStatus);
 

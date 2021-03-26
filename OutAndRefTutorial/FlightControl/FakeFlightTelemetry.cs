@@ -15,12 +15,13 @@ namespace OutAndRefTutorial
         public static int LowerPressureLimit = 40; //lower this below pressure too low for more malfunctions
         public static int PressureTooHigh = 71;
         public static int UpperPressureLimit = 71; //raise this above Pressure too high for more malfunctions
-        public static int MinimumReleaseAltitude = 36000; ///Setting at 36000 for comparison
+        public static int MinimumReleaseAltitude = 36000; ///Setting at 36000 for comparison. Set to 1000 to see the bomb search.
         public static int MaximumReleaseAltitude = 36000;
         public static int AltitudePerSecondLost = 20;
         public static int TerminalAltitudePerSecondLost = 880;
         public static int FindTargetPercentageChance = 50;
         public static int PressureAdjustmentSuccessChance = 100;
+        public static int GlideBombTotalTicks = 1800; //Can be changed to decrease array size.
 
         public static (Point,int,int) GenerateInitialFakeFlightData()
         {
@@ -131,9 +132,9 @@ namespace OutAndRefTutorial
         /// <param name="CurrentAltitude"></param>
         /// <param name=""></param>
         /// <returns></returns>
-        public static int DecrementAltitude(int CurrentAltitude, GabEnums.FlightStatus Status)
+        public static int DecrementAltitude(int CurrentAltitude, STABenums.FlightStatus Status)
         {
-            if ((Status == GabEnums.FlightStatus.InFlight) || (Status == GabEnums.FlightStatus.SelfInert))
+            if ((Status == STABenums.FlightStatus.InFlight) || (Status == STABenums.FlightStatus.SelfInert))
             {
                 return DecrementLoiterAltitude(CurrentAltitude);
             }
@@ -164,7 +165,7 @@ namespace OutAndRefTutorial
             return Altitude;
         }
 
-        public static GabEnums.FlightStatus HasFoundTarget(int secondsAloft)
+        public static STABenums.FlightStatus HasFoundTarget(int secondsAloft)
         {
             Random rnd = new Random();
 
@@ -179,12 +180,12 @@ namespace OutAndRefTutorial
             if (FoundTarget >= 100)
             {
                 //We found a target, dive.
-                return GabEnums.FlightStatus.Terminal;
+                return STABenums.FlightStatus.Terminal;
             }
             else
             {
                 //Loiter
-                return GabEnums.FlightStatus.InFlight;
+                return STABenums.FlightStatus.InFlight;
             }
         }
 

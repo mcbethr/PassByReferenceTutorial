@@ -8,11 +8,11 @@ namespace OutAndRefTutorial
     {
         static void Main(string[] args)
         {
-            long Engagement1Time = RunClassEngagement();
+            //long Engagement1Time = RunClassEngagement();
 
             long Engagement2Time = RunStructureEngagement();
 
-            Console.WriteLine("Engagement 1 (Class    ): " + Engagement1Time + " milliseconds.");
+            //Console.WriteLine("Engagement 1 (Class    ): " + Engagement1Time + " milliseconds.");
             Console.WriteLine("Engagement 2 (structure): " + Engagement2Time + " milliseconds.");
 
 
@@ -22,15 +22,17 @@ namespace OutAndRefTutorial
         {
             Stopwatch stopwatch1 = new Stopwatch();
             stopwatch1.Start();
-            GabWeaponClass GWC = new GabWeaponClass();
+
+            STABWeaponClass GWC = new STABWeaponClass();
 
             ///Run as a class
-            while (GWC.LastChamberData.Status != GabEnums.FlightStatus.Terminated)
+            while (GWC.LastTelemetryData.Status != STABenums.FlightStatus.Terminated)
             {
                 GWC.ExecuteWeaponFlightTick();
+                //Here is where we would Transmit telemetry to aircraft.
 
                 ///For debugging
-                if (GWC.LastChamberData.Status == GabEnums.FlightStatus.Terminated)
+                if (GWC.LastTelemetryData.Status == STABenums.FlightStatus.Terminated)
                 { //break
                 }
             }
@@ -39,20 +41,32 @@ namespace OutAndRefTutorial
             return stopwatch1.ElapsedMilliseconds;
         }
 
+
+
+
+
+
+
+
+
+
         public static long RunStructureEngagement()
         {
             Stopwatch stopwatch2 = new Stopwatch();
 
             stopwatch2.Start();
             //Run as a Structure
-            GabWeaponStruct GWS = new GabWeaponStruct();
 
-            while (GWS.LastChamberData.Status != GabEnums.FlightStatus.Terminated)
+            STABWeaponStruct GWS = new STABWeaponStruct();
+
+            while (GWS.LastTelemetryData.Status != STABenums.FlightStatus.Terminated)
             {
                 GWS.ExecuteWeaponFlightTick();
+                //Here is where we would Transmit telemetry to aircraft.
+
 
                 ///For debugging
-                if (GWS.LastChamberData.Status == GabEnums.FlightStatus.Terminated)
+                if (GWS.LastTelemetryData.Status == STABenums.FlightStatus.Terminated)
                 { //break}
                 }
             }

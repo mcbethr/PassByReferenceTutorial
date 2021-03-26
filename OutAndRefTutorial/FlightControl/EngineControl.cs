@@ -8,7 +8,7 @@ namespace OutAndRefTutorial
     public class ChamberInformation
     {
 
-        public struct ChamberInformationStruct
+        public struct TelemetryInformationStruct
         {
             public int PsiAtReading;
             public int PsiAfterCalibration;
@@ -17,14 +17,14 @@ namespace OutAndRefTutorial
             public decimal AveragePsi;
             public int ElapsedFlightTime;
             public int EngagementTime;
-            public GabEnums.ActionTaken Action;
-            public GabEnums.FaultStatus Fault;
-            public GabEnums.FlightStatus Status;
+            public STABenums.ActionTaken Action;
+            public STABenums.FaultStatus Fault;
+            public STABenums.FlightStatus Status;
             public DateTime TimeStamp;
             public Point Location;
         }
 
-        public class ChamberInformationClass
+        public class TelemetryInformationClass
         {
             public int PsiAtReading { get; set; }
             public int Altitude { get; set; }
@@ -33,9 +33,9 @@ namespace OutAndRefTutorial
             public int ElapsedFlightTime { get; set; }
             public int EngagementTime { get; set; }
             public int ReccomendedPressure { get; set; }
-            public GabEnums.ActionTaken Action { get; set; }
-            public GabEnums.FaultStatus Fault { get; set; }
-            public GabEnums.FlightStatus Status{ get; set; }
+            public STABenums.ActionTaken Action { get; set; }
+            public STABenums.FaultStatus Fault { get; set; }
+            public STABenums.FlightStatus Status{ get; set; }
             public DateTime TimeStamp { get; set; }
             public Point Location { get; set; }
         }
