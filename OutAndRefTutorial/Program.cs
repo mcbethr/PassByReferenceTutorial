@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using static OutAndRefTutorial.ChamberInformation;
+using static OutAndRefTutorial.EngineControl;
 
 namespace OutAndRefTutorial
 {

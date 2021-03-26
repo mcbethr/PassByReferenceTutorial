@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OutAndRefTutorial
 {
-    public class ChamberInformation
+    public class EngineControl
     {
 
         public struct TelemetryInformationStruct
@@ -39,6 +39,57 @@ namespace OutAndRefTutorial
             public DateTime TimeStamp { get; set; }
             public Point Location { get; set; }
         }
+
+
+        /// <summary>
+        /// Don't ever do this it would be 21600 lines long.
+        /// </summary>
+        public struct TelemetryInformationStructCrazy
+        {
+            public int PsiAtReading1;
+            public int PsiAfterCalibration1;
+            public int ReccomendedPressure1;
+            public int Altitude1;
+            public decimal AveragePsi1;
+            public int ElapsedFlightTime1;
+            public int EngagementTime1;
+            public STABenums.ActionTaken Action1;
+            public STABenums.FaultStatus Fault1;
+            public STABenums.FlightStatus Status1;
+            public DateTime TimeStamp1;
+            public Point Location1;
+
+                    
+            public int PsiAtReading2;
+            public int PsiAfterCalibration2;
+            public int ReccomendedPressure2;
+            public int Altitude2;
+            public decimal AveragePsi2;
+            public int ElapsedFlightTime2;
+            public int EngagementTime2;
+            public STABenums.ActionTaken Action2;
+            public STABenums.FaultStatus Fault2;
+            public STABenums.FlightStatus Status2;
+            public DateTime TimeStamp2;
+            public Point Location2;
+
+            ///And all the way down to...
+            ///
+            public int PsiAtReading1800;
+            public int PsiAfterCalibration1800;
+            public int ReccomendedPressure1800;
+            public int Altitude1800;
+            public decimal AveragePsi1800;
+            public int ElapsedFlightTime1800;
+            public int EngagementTime1800;
+            public STABenums.ActionTaken Action1800;
+            public STABenums.FaultStatus Fault1800;
+            public STABenums.FlightStatus Status1800;
+            public DateTime TimeStamp1800;
+            public Point Location1800;
+        }
+
+
 
     }
 }

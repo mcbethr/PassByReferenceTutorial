@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using static OutAndRefTutorial.ChamberInformation;
+using static OutAndRefTutorial.EngineControl;
 
 namespace OutAndRefTutorial
 {
