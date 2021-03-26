@@ -41,13 +41,13 @@ namespace OutAndRefTutorial
         /// any other state
         /// Flight is terminated when the weapon hits the ground at Altitude 0
         /// </summary>
-        /// <param name="chamberInformation"></param>
+        /// <param name="telemetryInformation"></param>
         /// <returns></returns>
-        public static void GenerateFlightTelemetry(ref TelemetryInformationStruct[] chamberInformation, ref TelemetryInformationStruct TIS, in int CurrentTick)
+        public static void GenerateFlightTelemetry(ref TelemetryInformationStruct[] telemetryInformation, ref TelemetryInformationStruct TIS, in int CurrentTick)
         {
 
 
-            TelemetryInformationStruct LastInformationAdded = chamberInformation[CurrentTick - 1];
+            TelemetryInformationStruct LastInformationAdded = telemetryInformation[CurrentTick - 1];
            
         //Adjust the altitude based on Loiter or Terminal mode
         //if the altitude is 0, terminate the flight
@@ -77,7 +77,7 @@ namespace OutAndRefTutorial
         ///If the weapon is not inert, check the engine pressure
         if (LastInformationAdded.Status != STABenums.FlightStatus.SelfInert)
         {
-            InspectCombustionChamber(in chamberInformation, ref TIS, in LastInformationAdded);
+            InspectCombustionChamber(in telemetryInformation, ref TIS, in LastInformationAdded);
         }
 
         //regardless of what happens, assemble the general telemetry and update the location
@@ -115,7 +115,7 @@ namespace OutAndRefTutorial
         /// <param name="TIS"></param>
         /// <param name="LastInformationAdded"></param>
         /// <returns></returns>
-            private static void InspectCombustionChamber(in TelemetryInformationStruct[] ChamberInformation, ref TelemetryInformationStruct TIS, in TelemetryInformationStruct LastInformationAdded)
+            private static void InspectCombustionChamber(in TelemetryInformationStruct[] telemetryInformation, ref TelemetryInformationStruct TIS, in TelemetryInformationStruct LastInformationAdded)
         {
 
             //Check the current pressure of the unit
@@ -128,7 +128,7 @@ namespace OutAndRefTutorial
             (TIS.PsiAfterCalibration, TIS.Action, TIS.Fault, TIS.Status) = CalibratePressure(TIS.PsiAtReading, FakeFlightTelemetry.ReccomendedPressure, TIS.Status);
 
             //Get the Average Engine Pressure
-            TIS.AveragePsi = Convert.ToDecimal(ChamberInformation.Average(item => item.PsiAtReading));
+            TIS.AveragePsi = Convert.ToDecimal(telemetryInformation.Average(item => item.PsiAtReading));
 
             
         }

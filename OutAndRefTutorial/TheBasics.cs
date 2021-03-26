@@ -14,9 +14,6 @@ namespace OutAndRefTutorial
 
         }
 
-
-
-
         public void AddTwoNumbersByReference(ref int number1, ref int number2)
         {
             number1 = number1 + number2;
@@ -34,7 +31,9 @@ namespace OutAndRefTutorial
             result = DoubleNumber * 2;
         }
 
-        public void AdjustPeesssure(ref int EnginePressure, in int RequiredPressure, out STABenums.FaultStatus fault)
+
+
+        public void AdjustPresssure(ref int EnginePressure, in int RequiredPressure, out STABenums.FaultStatus fault)
         {
             if (EnginePressure > RequiredPressure)
             {
@@ -53,6 +52,8 @@ namespace OutAndRefTutorial
 
         }
 
+
+
         private void IncreasePressure(ref int EnginePressure, in int RequiredPressure, out STABenums.FaultStatus fault)
         {
             ///Code to increase pressure and check for fault.
@@ -69,7 +70,6 @@ namespace OutAndRefTutorial
             fault = STABenums.FaultStatus.Ok;
         }
 
-
         private PressureResults HowYouWouldReallyDoIt(PressureResults toInspect)
         {
             ///Fake getting the information
@@ -79,6 +79,14 @@ namespace OutAndRefTutorial
             return toInspect;
         }
 
+        private void TryParseExample()
+        {
+
+            string myString = "123fred";
+            int result;
+            bool success = int.TryParse(myString, out result);
+
+        }
 
     }
 
@@ -97,5 +105,11 @@ namespace OutAndRefTutorial
             this.RequiredPressure = RequiredPressure;
         }
     }
+
+
+
+
+
+
  
 }

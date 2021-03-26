@@ -13,7 +13,7 @@ namespace OutAndRefTutorial
             long Engagement2Time = RunStructureEngagement();
 
             //Console.WriteLine("Engagement 1 (Class    ): " + Engagement1Time + " milliseconds.");
-            Console.WriteLine("Engagement 2 (structure): " + Engagement2Time + " milliseconds.");
+            //Console.WriteLine("Engagement 2 (structure): " + Engagement2Time + " milliseconds.");
 
 
         }

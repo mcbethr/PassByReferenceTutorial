@@ -6,7 +6,7 @@ using static OutAndRefTutorial.EngineControl;
 namespace OutAndRefTutorial
 {
     /// <summary>
-    /// Fires the STAB weapon using a class
+    /// Fires the STAB weapon using a Struct
     /// STAB - Standoff Telemetry Assisted Bomb
     /// </summary>
     public class STABWeaponStruct

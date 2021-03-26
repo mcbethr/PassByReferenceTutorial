@@ -25,7 +25,7 @@ namespace OutAndRefTutorial
         public STABWeaponClass()
         {
 
-            _TelemetryData = new List<ChamberInformation.TelemetryInformationClass>();
+            _TelemetryData = new List<EngineControl.TelemetryInformationClass>();
             PrintWeaponAway();
             _TelemetryData.Add(GenerateInitialTelemetry());
 
