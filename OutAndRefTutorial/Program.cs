@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using static OutAndRefTutorial.EngineControl;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace OutAndRefTutorial
 {
@@ -8,73 +9,87 @@ namespace OutAndRefTutorial
     {
         static void Main(string[] args)
         {
-            //long Engagement1Time = RunClassEngagement();
 
-            long Engagement2Time = RunStructureEngagement();
 
-            //Console.WriteLine("Engagement 1 (Class    ): " + Engagement1Time + " milliseconds.");
-            //Console.WriteLine("Engagement 2 (structure): " + Engagement2Time + " milliseconds.");
+           // long Processing1Time = RunClassTelemetry();
+           // long Processing2Time = RunStructureTelemetry();
+
+            ///Generate Telemetry for list of classes
+            //List<TelemetryData.TelemetryInformationClass> TICList = GenerateTenTelemetryClasses();
+
+            //Generate telemetry for an array of structures
+            TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
+            TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
+            GenerateTenTelemetryStructures(ref TISArray, ref TIS);
+
+            //Console.WriteLine("(Class    ): " + Processing1Time + " milliseconds.");
+            //Console.WriteLine("(Structure): " + Processing2Time + " milliseconds.");
 
 
         }
 
-        public static long RunClassEngagement()
+        public static long RunClassTelemetry()
         {
             Stopwatch stopwatch1 = new Stopwatch();
             stopwatch1.Start();
 
-            STABWeaponClass GWC = new STABWeaponClass();
+            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
+            Telemetry T = new Telemetry();
+            TIC = T.FillTelemetry(TIC);
 
-            ///Run as a class
-            while (GWC.LastTelemetryData.Status != STABenums.FlightStatus.Terminated)
-            {
-                GWC.ExecuteWeaponFlightTick();
-                //Here is where we would Transmit telemetry to aircraft.
 
-                ///For debugging
-                if (GWC.LastTelemetryData.Status == STABenums.FlightStatus.Terminated)
-                { //break
-                }
-            }
-            GWC.DisplayEngagement();
+            long AverageValue = T.AverageTelemetry(TIC);
+
             stopwatch1.Stop();
             return stopwatch1.ElapsedMilliseconds;
         }
 
-
-
-
-
-
-
-
-
-
-        public static long RunStructureEngagement()
+        public static long RunStructureTelemetry()
         {
             Stopwatch stopwatch2 = new Stopwatch();
-
             stopwatch2.Start();
-            //Run as a Structure
 
-            STABWeaponStruct GWS = new STABWeaponStruct();
-
-            while (GWS.LastTelemetryData.Status != STABenums.FlightStatus.Terminated)
-            {
-                GWS.ExecuteWeaponFlightTick();
-                //Here is where we would Transmit telemetry to aircraft.
+            TelemetryData.TelemetryInformationStruct TIC = new TelemetryData.TelemetryInformationStruct();
+            Telemetry T = new Telemetry();
+            T.FillTelemetry(ref TIC);
 
 
-                ///For debugging
-                if (GWS.LastTelemetryData.Status == STABenums.FlightStatus.Terminated)
-                { //break}
-                }
-            }
-            GWS.DisplayEngagement();
+            long AverageValue = T.AverageTelemetry(ref TIC);
+
             stopwatch2.Stop();
-
             return stopwatch2.ElapsedMilliseconds;
         }
 
+        public static List<TelemetryData.TelemetryInformationClass> GenerateTenTelemetryClasses()
+        {
+            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
+            Telemetry T = new Telemetry();
+
+            List<TelemetryData.TelemetryInformationClass> TelemetryList = new List<TelemetryData.TelemetryInformationClass>();
+
+            for (int i=0; i<10; i++)
+            {
+                TelemetryList.Add(T.FillTelemetry(TIC));
+            }
+
+            return TelemetryList;
+
+        }
+
+        public static void GenerateTenTelemetryStructures(ref TelemetryData.TelemetryInformationStruct[] TISArray, ref TelemetryData.TelemetryInformationStruct TIS)
+        {
+ 
+            Telemetry T = new Telemetry();
+
+            for (int i = 0; i < 10; i++)
+            {
+               T.FillTelemetry(ref TIS);
+                TISArray[i] = TIS;
+                
+            }
+
+            
+
+        }
     }
 }
