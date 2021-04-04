@@ -11,15 +11,15 @@ namespace OutAndRefTutorial
         {
 
 
-           // long Processing1Time = RunClassTelemetry();
-           // long Processing2Time = RunStructureTelemetry();
+            //long Processing1Time = RunClassTelemetry();
+            //long Processing2Time = RunStructureTelemetry();
 
             ///Generate Telemetry for list of classes
             //List<TelemetryData.TelemetryInformationClass> TICList = GenerateTenTelemetryClasses();
 
             //Generate telemetry for an array of structures
-            TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
             TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
+            TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
             GenerateTenTelemetryStructures(ref TISArray, ref TIS);
 
             //Console.WriteLine("(Class    ): " + Processing1Time + " milliseconds.");
