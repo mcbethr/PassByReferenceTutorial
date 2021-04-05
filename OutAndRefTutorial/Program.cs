@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using static OutAndRefTutorial.TelemetryData;
 
 namespace OutAndRefTutorial
 {
@@ -11,53 +12,70 @@ namespace OutAndRefTutorial
         {
 
 
-            //long Processing1Time = RunClassTelemetry();
-            //long Processing2Time = RunStructureTelemetry();
+            long SensorAverage1 = RunClassTelemetryByVal();
+            long SensorAverage2 = RunClassTelemetryByRef();
+            long SensorAverage3 = RunStructureTelemetryByRef();
+            long SensorAverage4 = RunStructureTelemetryByVal();
 
             ///Generate Telemetry for list of classes
             //List<TelemetryData.TelemetryInformationClass> TICList = GenerateTenTelemetryClasses();
 
             //Generate telemetry for an array of structures
-            TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
-            TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
-            GenerateTenTelemetryStructures(ref TISArray, ref TIS);
+            //TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
+            //TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
+            //GenerateTenTelemetryStructures(ref TISArray, ref TIS);
 
-            //Console.WriteLine("(Class    ): " + Processing1Time + " milliseconds.");
-            //Console.WriteLine("(Structure): " + Processing2Time + " milliseconds.");
+
 
 
         }
 
-        public static long RunClassTelemetry()
+        public static long RunClassTelemetryByVal()
         {
-            Stopwatch stopwatch1 = new Stopwatch();
-            stopwatch1.Start();
 
             TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
             Telemetry T = new Telemetry();
             TIC = T.FillTelemetry(TIC);
 
 
-            long AverageValue = T.AverageTelemetry(TIC);
+            return T.AverageTelemetry(TIC);
 
-            stopwatch1.Stop();
-            return stopwatch1.ElapsedMilliseconds;
         }
 
-        public static long RunStructureTelemetry()
+        public static long RunClassTelemetryByRef()
         {
-            Stopwatch stopwatch2 = new Stopwatch();
-            stopwatch2.Start();
 
-            TelemetryData.TelemetryInformationStruct TIC = new TelemetryData.TelemetryInformationStruct();
+            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
             Telemetry T = new Telemetry();
             T.FillTelemetry(ref TIC);
 
 
-            long AverageValue = T.AverageTelemetry(ref TIC);
+            return T.AverageTelemetry(ref TIC);
 
-            stopwatch2.Stop();
-            return stopwatch2.ElapsedMilliseconds;
+        }
+
+        public static long RunStructureTelemetryByRef()
+        {
+
+            TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
+            Telemetry T = new Telemetry();
+            T.FillTelemetry(ref TIS);
+
+
+            return T.AverageTelemetry(ref TIS);
+
+        }
+
+        public static long RunStructureTelemetryByVal()
+        {
+
+            
+            Telemetry T = new Telemetry();
+            TelemetryData.TelemetryInformationStruct TIS = T.FillTelemetry();
+            
+            return T.AverageTelemetry(TIS);
+                        
+
         }
 
         public static List<TelemetryData.TelemetryInformationClass> GenerateTenTelemetryClasses()
