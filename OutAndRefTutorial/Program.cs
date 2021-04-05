@@ -12,9 +12,9 @@ namespace OutAndRefTutorial
         {
 
 
-            long SensorAverage1 = RunClassTelemetryByVal();
-            long SensorAverage2 = RunClassTelemetryByRef();
-            long SensorAverage3 = RunStructureTelemetryByRef();
+            //long SensorAverage1 = RunClassTelemetryByVal();
+            //long SensorAverage2 = RunClassTelemetryByRef();
+           // long SensorAverage3 = RunStructureTelemetryByRef();
             long SensorAverage4 = RunStructureTelemetryByVal();
 
             ///Generate Telemetry for list of classes
@@ -35,7 +35,7 @@ namespace OutAndRefTutorial
 
             TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
             Telemetry T = new Telemetry();
-            TIC = T.FillTelemetry(TIC);
+            TIC = T.FillTelemetryWithClass();
 
 
             return T.AverageTelemetry(TIC);
@@ -71,9 +71,9 @@ namespace OutAndRefTutorial
 
             
             Telemetry T = new Telemetry();
-            TelemetryData.TelemetryInformationStruct TIS = T.FillTelemetry();
+            TelemetryData.TelemetryInformationStruct TISr = T.FillTelemetryWithStruct();
             
-            return T.AverageTelemetry(TIS);
+            return T.AverageTelemetry(TISr);
                         
 
         }

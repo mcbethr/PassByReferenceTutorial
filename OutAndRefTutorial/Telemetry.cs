@@ -10,9 +10,9 @@ namespace OutAndRefTutorial
     {
 
 
-        public TelemetryInformationClass FillTelemetry(TelemetryInformationClass TIC)
+        public TelemetryInformationClass FillTelemetryWithClass()
         {
-
+            TelemetryInformationClass TIC = new TelemetryInformationClass();
             TIC.Sensor1 = GenerateTelemetry();
             TIC.Sensor2 = GenerateTelemetry();
             TIC.Sensor3 = GenerateTelemetry();
@@ -36,7 +36,7 @@ namespace OutAndRefTutorial
 
         }
 
-        public TelemetryInformationStruct FillTelemetry()
+        public TelemetryInformationStruct FillTelemetryWithStruct()
         {
             TelemetryInformationStruct TIS = new TelemetryInformationStruct();
             TIS.Sensor1 = GenerateTelemetry();
