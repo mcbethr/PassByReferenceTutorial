@@ -10,76 +10,110 @@ namespace OutAndRefTutorial
     {
 
 
-        public TelemetryInformationClass FillTelemetryWithClass()
-        {
-            TelemetryInformationClass TIC = new TelemetryInformationClass();
-            TIC.Sensor1 = GenerateTelemetry();
-            TIC.Sensor2 = GenerateTelemetry();
-            TIC.Sensor3 = GenerateTelemetry();
-            return TIC;
-        }
-
-        public void FillTelemetry(ref TelemetryInformationClass TIC)
+        public static long GenerateTelemetry()
         {
 
-            TIC.Sensor1 = GenerateTelemetry();
-            TIC.Sensor2 = GenerateTelemetry();
-            TIC.Sensor3 = GenerateTelemetry();
-        }
-
-        public void FillTelemetry(ref TelemetryInformationStruct TIS)
-        {
-
-            TIS.Sensor1 = GenerateTelemetry();
-            TIS.Sensor2 = GenerateTelemetry();
-            TIS.Sensor3 = GenerateTelemetry();
-
-        }
-
-        public TelemetryInformationStruct FillTelemetryWithStruct()
-        {
-            TelemetryInformationStruct TIS = new TelemetryInformationStruct();
-            TIS.Sensor1 = GenerateTelemetry();
-            TIS.Sensor2 = GenerateTelemetry();
-            TIS.Sensor3 = GenerateTelemetry();
-            return TIS;
-        }
-
-        public long AverageTelemetry(TelemetryInformationClass TIC)
-        {
-            ///do some kind of fake operation to everage and return the middle number
-            return TIC.Sensor2;
-        }
-
-        public long AverageTelemetry(ref TelemetryInformationClass TIC)
-        {
-            ///do some kind of fake operation to everage and return the middle number
-            return TIC.Sensor2;
-        }
-
-        public long AverageTelemetry(ref TelemetryInformationStruct TIS)
-        {
-            ///do some kind of fake operation to average and return the middle number
-            return TIS.Sensor2;
-        }
-
-        public long AverageTelemetry(TelemetryInformationStruct TIS)
-        {
-            ///do some kind of fake operation to average and return the middle number
-            return TIS.Sensor2;
-        }
-
-
-        private long GenerateTelemetry()
-        {
-            
             Random rnd = new Random();
+
             byte[] buf = new byte[8];
             rnd.NextBytes(buf);
-            long LongRand = (long)BitConverter.ToInt64(buf, 0);
-               
-            return (LongRand);
+            long longRand = BitConverter.ToInt64(buf, 0);
+
+            return rnd.Next(int.MinValue, int.MaxValue);
+
         }
+
+        public static void FillTelemetryClassByVal(TelemetryClass TC)
+        {
+
+            TC.one = Telemetry.GenerateTelemetry();
+            TC.two = Telemetry.GenerateTelemetry();
+
+        }
+
+        public static void FillTelemetryClassByRef(ref TelemetryClass TC)
+        {
+
+
+            TC.one = Telemetry.GenerateTelemetry();
+            TC.two = Telemetry.GenerateTelemetry();
+
+        }
+
+        public static TelemetryStruct FillTelemetryStructByVal(TelemetryStruct TS)
+        {
+            TS.one = Telemetry.GenerateTelemetry();
+            TS.two = Telemetry.GenerateTelemetry();
+
+            return TS;
+        }
+
+        public static void FillTelemetryStructByRef(ref TelemetryStruct TS)
+        {
+            TS.one = Telemetry.GenerateTelemetry();
+            TS.two = Telemetry.GenerateTelemetry();
+        }
+
+        public static TelemetryClass AverageTelemetryClassByVal(TelemetryClass TC)
+        {
+            TC.Average = (TC.one + TC.two) / 2;
+            return TC;
+        }
+
+
+        public static TelemetryClass AverageTelemetryClassByValNew(TelemetryClass TC)
+        {
+            //You are passing a copy of the reference but this create a new reference
+            //TC = new TelemetryClass();
+            TelemetryClass TCn = new TelemetryClass();
+            TCn.one = TC.one;
+            TCn.two = TC.two;
+            TCn.Average = (TC.one + TC.two) / 2;
+            return TCn;
+        }
+
+        public static void AverageTelemetryClassByRef(ref TelemetryClass TC)
+        {
+            TC.Average = (TC.one + TC.two) / 2;
+        }
+
+        public static void SwapTelemetryClassByRef(ref TelemetryClass TC1, ref TelemetryClass TC2)
+        {
+            //TelemetryClass TMP = TC1;
+            TC1 = TC2;
+            //TC2 = TMP;
+        }
+
+        public static TelemetryClass ReturnTC1()
+        {
+            TelemetryClass TC1 = new TelemetryClass();
+            TC1.one = 1;
+            TC1.two = 2;
+            return TC1;
+        }
+
+        public static TelemetryClass ReturnTC2()
+        {
+            TelemetryClass TC2 = new TelemetryClass();
+            TC2.one = 1;
+            TC2.two = 2;
+            return TC2;
+        }
+
+
+
+        public static TelemetryStruct AverageTelemetryStructByVal(TelemetryStruct TS)
+        {
+            TS.Average = (TS.one + TS.two) / 2;
+            return TS;
+        }
+
+        public static void AverageTelemetryStructByRef(ref TelemetryStruct TS)
+        {
+            TS.Average = (TS.one + TS.two) / 2;
+
+        }
+
 
     }
 }

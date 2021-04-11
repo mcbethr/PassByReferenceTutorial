@@ -7,19 +7,18 @@ namespace OutAndRefTutorial
 {
     public class TelemetryData
     {
-
-        public struct TelemetryInformationStruct
+        public class TelemetryClass
         {
-            public long Sensor1;
-            public long Sensor2;
-            public long Sensor3;
+            public long one { get; set; }
+            public long two { get; set; }
+            public long Average { get; set; }
         }
 
-        public class TelemetryInformationClass
+        public struct TelemetryStruct
         {
-            public long Sensor1 { get; set; }
-            public long Sensor2 { get; set; }
-            public long Sensor3 { get; set; }
+            public long one;
+            public long two;
+            public long Average;
         }
 
 

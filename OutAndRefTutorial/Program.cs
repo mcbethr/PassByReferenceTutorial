@@ -11,103 +11,61 @@ namespace OutAndRefTutorial
         static void Main(string[] args)
         {
 
-
-            //long SensorAverage1 = RunClassTelemetryByVal();
-            //long SensorAverage2 = RunClassTelemetryByRef();
-           // long SensorAverage3 = RunStructureTelemetryByRef();
-            long SensorAverage4 = RunStructureTelemetryByVal();
-
-            ///Generate Telemetry for list of classes
-            //List<TelemetryData.TelemetryInformationClass> TICList = GenerateTenTelemetryClasses();
-
-            //Generate telemetry for an array of structures
-            //TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
-            //TelemetryData.TelemetryInformationStruct[] TISArray = new TelemetryData.TelemetryInformationStruct[10];
-            //GenerateTenTelemetryStructures(ref TISArray, ref TIS);
-
-
-
-
-        }
-
-        public static long RunClassTelemetryByVal()
-        {
-
-            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
-            Telemetry T = new Telemetry();
-            TIC = T.FillTelemetryWithClass();
-
-
-            return T.AverageTelemetry(TIC);
-
-        }
-
-        public static long RunClassTelemetryByRef()
-        {
-
-            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
-            Telemetry T = new Telemetry();
-            T.FillTelemetry(ref TIC);
-
-
-            return T.AverageTelemetry(ref TIC);
-
-        }
-
-        public static long RunStructureTelemetryByRef()
-        {
-
-            TelemetryData.TelemetryInformationStruct TIS = new TelemetryData.TelemetryInformationStruct();
-            Telemetry T = new Telemetry();
-            T.FillTelemetry(ref TIS);
-
-
-            return T.AverageTelemetry(ref TIS);
-
-        }
-
-        public static long RunStructureTelemetryByVal()
-        {
-
+            TheBasics basic = new TheBasics();
+            int _one = 1;
+            int _two = 2;
             
-            Telemetry T = new Telemetry();
-            TelemetryData.TelemetryInformationStruct TISr = T.FillTelemetryWithStruct();
-            
-            return T.AverageTelemetry(TISr);
-                        
+            int answer = basic.AddTwoNumbersByValue(_one, _two);
 
-        }
-
-        public static List<TelemetryData.TelemetryInformationClass> GenerateTenTelemetryClasses()
-        {
-            TelemetryData.TelemetryInformationClass TIC = new TelemetryData.TelemetryInformationClass();
-            Telemetry T = new Telemetry();
-
-            List<TelemetryData.TelemetryInformationClass> TelemetryList = new List<TelemetryData.TelemetryInformationClass>();
-
-            for (int i=0; i<10; i++)
-            {
-                TelemetryList.Add(T.FillTelemetry(TIC));
-            }
-
-            return TelemetryList;
-
-        }
-
-        public static void GenerateTenTelemetryStructures(ref TelemetryData.TelemetryInformationStruct[] TISArray, ref TelemetryData.TelemetryInformationStruct TIS)
-        {
- 
-            Telemetry T = new Telemetry();
-
-            for (int i = 0; i < 10; i++)
-            {
-               T.FillTelemetry(ref TIS);
-                TISArray[i] = TIS;
-                
-            }
-
+            basic.AddTwoNumbersByReference(ref _one, ref _two);
             
 
+            //Pass by reference type by value
+
+            TelemetryClass TC = new TelemetryClass();
+            TC.one = 2;
+            TC.two = 4;
+            Telemetry.AverageTelemetryClassByVal(TC);
+
+            //Swap memory locations
+            TelemetryClass TC1 = new TelemetryClass();
+            TC1.one = 2;
+            TC1.two = 4;
+
+            TelemetryClass TC2 = new TelemetryClass();
+            TC2.one = 3;
+            TC2.two = 5;    
+            Telemetry.SwapTelemetryClassByRef(ref TC1, ref TC2);
+
+            //Fill Telemetry Data Class by Value
+            TelemetryClass TCv = new TelemetryClass();
+            Telemetry.FillTelemetryClassByVal(TCv);
+            Telemetry.AverageTelemetryClassByVal(TCv);
+
+            //Fill Telemetry Data Class By Reference
+            TelemetryData.TelemetryClass TCr = new TelemetryData.TelemetryClass();
+            Telemetry.FillTelemetryClassByRef(ref TCr);
+            Telemetry.AverageTelemetryClassByRef(ref TCr);
+
+            //Fill Telemetry Data Class By ReferenceNew 
+            TelemetryData.TelemetryClass TCvn = new TelemetryData.TelemetryClass();
+            Telemetry.FillTelemetryClassByVal(TCvn);
+            TelemetryData.TelemetryClass TCvnResult = Telemetry.AverageTelemetryClassByValNew(TCvn);
+
+
+
+            ///Fill Telemetry Data Struct by Value
+            TelemetryData.TelemetryStruct TSv = new TelemetryData.TelemetryStruct();
+            TSv = Telemetry.FillTelemetryStructByVal(TSv);
+            TSv = Telemetry.AverageTelemetryStructByVal(TSv);
+
+            //Fill Telemetry Data Struct by Reference
+            TelemetryData.TelemetryStruct TSr = new TelemetryData.TelemetryStruct();
+            Telemetry.FillTelemetryStructByRef(ref TSr);
+            Telemetry.AverageTelemetryStructByRef(ref TSr);
+
+
         }
+
     }
 }

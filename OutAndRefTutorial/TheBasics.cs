@@ -7,17 +7,32 @@ namespace OutAndRefTutorial
     public class TheBasics
     {
 
+
+
+
         public int AddTwoNumbersByValue(int number1, int number2)
         {
-
+            
             return number1 + number2;
 
         }
+
+
+
+
+
 
         public void AddTwoNumbersByReference(ref int number1, ref int number2)
         {
             number1 = number1 + number2;
         }
+
+
+
+
+
+
+
 
         public void PassingViaIn(ref int finalNumber, in int number1, in int number2)
         {
@@ -25,6 +40,10 @@ namespace OutAndRefTutorial
             ///Cant do this
             //number1 = number1 + number2;
         }
+
+
+
+
 
         public void PassingViaOut(in int DoubleNumber, out int result)
         {
